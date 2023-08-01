@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
+import '../constants/constants.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   final List items;
   final List surahs;
+  @override
+  String get searchFieldLabel => '... أدخل الآية';
+  @override
+  TextStyle get searchFieldStyle => TextStyle(
+        color: mainTextColor,
+        fontSize: 20.0,
+        fontFamily: 'kitab',
+      );
 
   CustomSearchDelegate({required this.items, required this.surahs});
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // TODO: implement buildActions
     return [
       IconButton(
-        icon: const Icon(Icons.clear),
+        icon: Icon(
+          Icons.clear,
+          color: mainTextColor,
+        ),
         onPressed: () {
           query = '';
         },
@@ -21,9 +32,11 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
     return IconButton(
-      icon: const Icon(Icons.arrow_back),
+      icon: Icon(
+        Icons.arrow_back,
+        color: mainTextColor,
+      ),
       onPressed: () {
         close(context, null);
       },
@@ -43,7 +56,6 @@ class CustomSearchDelegate extends SearchDelegate {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              print(filteredData[index]['page']);
               Navigator.pushReplacementNamed(context, '/', arguments: [
                 filteredData[index]['page'],
                 filteredData[index]['id']
@@ -115,7 +127,9 @@ class CustomSearchDelegate extends SearchDelegate {
             ),
             leading: Column(
               children: [
-                const Text('الصفحة'),
+                const Text(
+                  'الصفحة',
+                ),
                 Text(
                   filteredData[index]['page'].toString(),
                   textDirection: TextDirection.rtl,

@@ -1,0 +1,34 @@
+{
+    "sourceFile": "lib/services/theme_provider.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1690921496572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1690922213152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,5 @@\n   }\r\n }\r\n \r\n final lightTheme = ThemeData.light();\r\n-final darkTheme = ThemeData.dark();\r\n+final darkTheme = ThemeData.dark().c;\r\n"
+                },
+                {
+                    "date": 1690922221246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,8 @@\n   }\r\n }\r\n \r\n final lightTheme = ThemeData.light();\r\n-final darkTheme = ThemeData.dark().c;\r\n+final darkTheme = ThemeData.dark().copyWith(\r\n+  brightness: Brightness.dark,\r\n+  \r\n+);\r\n"
+                },
+                {
+                    "date": 1690922227074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,6 +15,7 @@\n \r\n final lightTheme = ThemeData.light();\r\n final darkTheme = ThemeData.dark().copyWith(\r\n   brightness: Brightness.dark,\r\n-  \r\n+  primarySwatch: Colors.blue,\r\n+  accentColor: Colors.amber,\r\n );\r\n"
+                },
+                {
+                    "date": 1690922236158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,5 @@\n   }\r\n }\r\n \r\n final lightTheme = ThemeData.light();\r\n-final darkTheme = ThemeData.dark().copyWith(\r\n-  brightness: Brightness.dark,\r\n-  primarySwatch: Colors.blue,\r\n-  accentColor: Colors.amber,\r\n-);\r\n+final darkTheme = ThemeData.dark();\r\n"
+                }
+            ],
+            "date": 1690921496572,
+            "name": "Commit-0",
+            "content": "import 'package:flutter/material.dart';\r\n\r\nclass ThemeProvider extends ChangeNotifier {\r\n  bool _isDarkMode = false;\r\n\r\n  ThemeData get themeData => _isDarkMode ? darkTheme : lightTheme;\r\n\r\n  bool get isDarkMode => _isDarkMode;\r\n\r\n  void toggleTheme() {\r\n    _isDarkMode = !_isDarkMode;\r\n    notifyListeners();\r\n  }\r\n}\r\n\r\nfinal lightTheme = ThemeData.light();\r\nfinal darkTheme = ThemeData.dark();\r\n"
+        }
+    ]
+}

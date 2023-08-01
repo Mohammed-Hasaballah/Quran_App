@@ -1,11 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:quran_application/screens/surahs_screen.dart';
-import 'package:quran_application/services/search-delegate.dart';
+import 'package:quran_application/services/search_delegate.dart';
 import 'package:quran_application/services/json_helper.dart';
 import 'package:quran_application/services/tafseer_service.dart';
-
 import '../constants/constants.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -79,26 +77,35 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: 100,
                         child: Image.asset('images/quran-icon.png'))),
               ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SurahsScreen(
-                                ayasFromJson: _ayasFromJson,
-                                surahs: surahs,
-                                pageViewController: pageViewController,
-                              )));
-                },
-                title: Text(
-                  '  أسماء السور',
-                  style: TextStyle(
-                    fontFamily: 'kitab',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: mainTextColor,
-                  ),
-                ),
+              Expanded(
+                child: ListView.separated(
+                    itemCount: surahs.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider(
+                        height: 1,
+                        thickness: 1,
+                      );
+                    },
+                    itemBuilder: (context, index) => ListTile(
+                          onTap: () {
+                            Navigator.pop(context);
+
+                            int initialPage = 0;
+
+                            initialPage = _ayasFromJson.firstWhere((ayaData) =>
+                                ayaData['sura_name_ar'] ==
+                                surahs[index])['page'];
+
+                            pageViewController.jumpToPage(initialPage - 1);
+                          },
+                          title: Text(
+                            surahs[index],
+                            style: const TextStyle(
+                                color: Color(0xff8c5824),
+                                fontFamily: 'kitab',
+                                fontSize: 20),
+                          ),
+                        )),
               ),
               const Divider(
                 thickness: 0.8,
